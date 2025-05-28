@@ -1,5 +1,7 @@
 import time
+
 from src.model import Order
+from src.redis_db import REDIS_DB
 
 
 def format_product(pk: str):
@@ -19,3 +21,5 @@ def order_completed(order: Order) -> None:
     time.sleep(5)
     order.status = "completed"
     order.save()
+    print("send data in stream")
+    REDIS_DB.xadd('order_completed', order.model_dump(), '*')
