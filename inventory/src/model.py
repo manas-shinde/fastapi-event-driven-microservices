@@ -1,11 +1,12 @@
-from redis_om import HashModel
-from src.redisDb import redis_db
+from redis_om import HashModel, Field
+from src.redis_db import REDIS_DB
 
 
 class Product(HashModel):
+    id: str = Field(index=True)
     name: str
     quantity: int
     price: float
 
     class Meta:
-        database: redis_db
+        database: REDIS_DB
