@@ -16,7 +16,7 @@ async def get_all_products() -> List[Product]:
 
 
 @product_route.get("/{id}")
-async def get_product_info(id: str) -> Product:
+def get_product_info(id: str) -> Product:
     try:
         all_products = list(Product.all_pks())
         for pk in all_products:
