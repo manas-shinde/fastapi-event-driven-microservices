@@ -5,7 +5,7 @@ from src.route import product_route
 version = 'v1'
 
 app = FastAPI(
-    title="FastAPI microservice",
+    title="FastAPI microservice - INVENTORY",
     description="A FastAPI-based microservices architecture using Redis for data and stream-based messaging between services. ",
     version=version,
 )
