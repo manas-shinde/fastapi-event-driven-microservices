@@ -20,14 +20,14 @@ def consume_order_complete():
             if results != []:
                 for result in results:
                     order = result[1][0][1]
-                    product: Product = get_product_info(order['product_id'])
-                    print(product)
+                    product = get_product_info("order['product_id']")
                     product.quantity = int(
                         product.quantity) - int(order['quantity'])
                     product.save()
 
         except Exception as e:
             print(str(e))
+            REDIS_DB.xadd("refund_order", order, '*')
 
         time.sleep(2)
 
