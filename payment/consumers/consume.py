@@ -7,7 +7,7 @@ key = "refund_order"
 group = "payment-group"
 
 
-def consume_order_complete():
+def consume_order_refund():
     try:
         REDIS_DB.xgroup_create(key, group)
     except:
@@ -30,4 +30,4 @@ def consume_order_complete():
 
 
 if __name__ == "__main__":
-    consume_order_complete()
+    consume_order_refund()
