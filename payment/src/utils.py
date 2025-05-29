@@ -9,6 +9,7 @@ def format_product(pk: str):
     return {
         "id": order.pk,
         'product_id': order.product_id,
+        'product_name': order.product_name,
         'unit_price': order.unit_price,
         'fee': order.fee,
         "quantity": order.quantity,
@@ -21,5 +22,5 @@ def order_completed(order: Order) -> None:
     time.sleep(5)
     order.status = "completed"
     order.save()
-    print("send data in stream")
+    
     REDIS_DB.xadd('order_completed', order.model_dump(), '*')

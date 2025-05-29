@@ -41,9 +41,10 @@ async def create_order(request: Request, background_tasks: BackgroundTasks):
     if int(product['quantity']) > int(body['quantity']):
         order = Order(
             product_id=product['id'],
+            product_name=product['name'],
             unit_price=product['unit_price'],
             fee=0.2 * product['unit_price'],
-            total_amout=1.2 * product['unit_price'],
+            total_amout=(1.2 * product['unit_price'])*body['quantity'],
             quantity=body['quantity'],
             status="pending"
         )
@@ -55,5 +56,5 @@ async def create_order(request: Request, background_tasks: BackgroundTasks):
     else:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Currenlty inventory dont have product with quantity - {body['quantity']} is not available."
+            detail=f"Currenlty inventory dont have product name - {product['name']} with quantity - {body['quantity']} is not available."
         )
