@@ -1,4 +1,6 @@
 import time
+import json
+import requests
 from src.redis_db import REDIS_DB
 from src.route import get_product_info
 from src.model import Product
@@ -6,6 +8,7 @@ from src.model import Product
 
 key = "order_completed"
 group = "inventory-group"
+UPDATE_ANALYTICS_URL: str = "http://127.0.0.1:8003/api/v1/analytics/update"
 
 
 def consume_order_complete():
@@ -20,10 +23,24 @@ def consume_order_complete():
             if results != []:
                 for result in results:
                     order = result[1][0][1]
-                    product = get_product_info("order['product_id']")
+                    product: Product = get_product_info(order['product_id'])
                     product.quantity = int(
                         product.quantity) - int(order['quantity'])
                     product.save()
+
+                    # Update Analytics dataset
+                    payload = json.dumps({
+                        "product_id": product.id,
+                        "product_name": product.name,
+                        "quantity": int(order['quantity']),
+                        "unit_price": product.unit_price
+                    })
+                    headers = {
+                        'Content-Type': 'application/json'
+                    }
+
+                    response = requests.request(
+                        "POST", UPDATE_ANALYTICS_URL, headers=headers, data=payload)
 
         except Exception as e:
             print(str(e))
