@@ -40,7 +40,7 @@ async def create_a_product(product: CreateProductSchema) -> Product:
     product_redis = Product(
         id=str(hash(product.name)),
         name=product.name,
-        price=product.price,
+        unit_price=product.unit_price,
         quantity=product.quantity
     )
 

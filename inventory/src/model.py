@@ -6,7 +6,7 @@ class Product(HashModel):
     id: str = Field(index=True)
     name: str
     quantity: int
-    price: float
+    unit_price: float
 
     class Meta:
         database: REDIS_DB

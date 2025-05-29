@@ -6,6 +6,6 @@ def format_product(pk: str):
     return {
         'id': product.id,
         'name': product.name,
-        'price': product.price,
+        'unit_price': product.unit_price,
         "quantity": product.quantity
     }

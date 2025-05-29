@@ -41,9 +41,9 @@ async def create_order(request: Request, background_tasks: BackgroundTasks):
     if int(product['quantity']) > int(body['quantity']):
         order = Order(
             product_id=product['id'],
-            price=product['price'],
-            fee=0.2 * product['price'],
-            total_amout=1.2 * product['price'],
+            unit_price=product['unit_price'],
+            fee=0.2 * product['unit_price'],
+            total_amout=1.2 * product['unit_price'],
             quantity=body['quantity'],
             status="pending"
         )

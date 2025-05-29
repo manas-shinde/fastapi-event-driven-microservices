@@ -9,7 +9,7 @@ def format_product(pk: str):
     return {
         "id": order.pk,
         'product_id': order.product_id,
-        'price': order.price,
+        'unit_price': order.unit_price,
         'fee': order.fee,
         "quantity": order.quantity,
         "total_amout": order.total_amout,
