@@ -18,7 +18,7 @@ This project **does not include a frontend** and is focused entirely on backend 
 
 You can test all available endpoints using the included Postman collection.
 
-### 👉 [Postman Collection: FastAPI Microservices](FastAPI%20Microservices.postman_collection.json)
+### 👉 [Postman Collection: FastAPI Microservices](https://github.com/manas-shinde/fastapi-event-driven-microservices/blob/main/FastAPI%20Microservices.postman_collection.json)
 
 ---
 
